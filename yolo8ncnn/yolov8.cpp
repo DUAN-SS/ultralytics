@@ -9,9 +9,9 @@ int Detect::DetectYolov8(const cv::Mat& bgr, std::vector<Object>& objects)
 
 	// original pretrained model from https://github.com/ultralytics/ultralytics
 	// the ncnn model https://github.com/nihui/ncnn-assets/tree/master/models
-	if (yolov8.load_param("yolov8n.ncnn.param"))
+	if (yolov8.load_param("best.ncnn.param"))
 		exit(-1);
-	if (yolov8.load_model("yolov8n.ncnn.bin"))
+	if (yolov8.load_model("best.ncnn.bin"))
 		exit(-1);
 
 	const int target_size = 640;
@@ -266,15 +266,7 @@ void Detect::NonMaxSuppression(
 void Detect::DrawObjects(const cv::Mat& bgr, const std::vector<Object>& objects)
 {
 	static const char* class_names[] = {
-		"person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
-		"fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow",
-		"elephant", "bear", "zebra", "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
-		"skis", "snowboard", "sports ball", "kite", "baseball bat", "baseball glove", "skateboard", "surfboard",
-		"tennis racket", "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl", "banana", "apple",
-		"sandwich", "orange", "broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "couch",
-		"potted plant", "bed", "dining table", "toilet", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone",
-		"microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
-		"hair drier", "toothbrush"
+		"display", "button", "pushBar", "steelingWheel", "knob"
 	};
 
 	cv::Mat image = bgr.clone();
